@@ -25,7 +25,7 @@ export default function ViewPlayer() {
     <div>
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Player Detail</h2>
+          <h2 className="text-center m-4">Player's Detail</h2>
 
           <div className="card">
             <div className="card-header">

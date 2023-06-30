@@ -3,10 +3,9 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 export default function Home() {
-
   const [players, setPlayer] = useState([]);
 
-  const  {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     loadPlayers();
@@ -21,13 +20,6 @@ export default function Home() {
     await axios.delete(`http://localhost:8080/player/delete/${id}`);
     loadPlayers();
   };
-
-  // const deleteUser = async (id) => {
-  //   await axios.delete(`http://localhost:8080/user/${id}`);
-  //   loadUsers();
-  // };
-
-
 
   return (
     <div className="container">
@@ -52,11 +44,19 @@ export default function Home() {
                 <td>{player.number}</td>
                 <td>{player.club}</td>
                 <td>
-                  <Link className="btn btn-warning mx-2" to={`/update/${player.id}`}
-                  > Update</Link>
-                  <button className="btn btn-danger mx-2"
-                  onClick={() => deletePlayer(player.id)}
-                  >Delete</button>
+                  <Link
+                    className="btn btn-warning mx-2"
+                    to={`/update/${player.id}`}
+                  >
+                    {" "}
+                    Update
+                  </Link>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => deletePlayer(player.id)}
+                  >
+                    Delete
+                  </button>
                   <Link
                     className="btn btn-primary mx-2"
                     to={`/player/${player.id}`}

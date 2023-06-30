@@ -34,11 +34,6 @@ public class PlayerController {
         return playerRepository.findById(id)
                 .orElseThrow(()->new PlayerNotFoundException(id));
     }
-//    @GetMapping("/index/{id}")
-//    public Player detail(@PathVariable("id") Integer id
-//                         ) throws NotFoundException {
-//        return playerService.findById(id);
-//    }
 
     @PostMapping("/add")
     public Player add(@RequestBody Player player) {
