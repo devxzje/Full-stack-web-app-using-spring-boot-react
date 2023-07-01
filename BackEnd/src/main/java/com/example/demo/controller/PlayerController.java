@@ -7,6 +7,8 @@ import com.example.demo.repository.PlayerRepository;
 import com.example.demo.service.PlayerService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,16 +25,21 @@ public class PlayerController {
     @Autowired
     PlayerRepository playerRepository;
 
+//    @GetMapping("/index")
+//    public List<Player> get() {
+//        return playerService.getAll();
+//    }
+
     @GetMapping("/index")
-    public List<Player> get() {
-        return playerService.getAll();
+    public Page<Player> get(Pageable pageable) {
+        return playerRepository.findAll(pageable);
     }
 
     @GetMapping("/{id}")
     public Player detail(@PathVariable("id") Integer id
-                         ) throws NotFoundException {
+    ) throws NotFoundException {
         return playerRepository.findById(id)
-                .orElseThrow(()->new PlayerNotFoundException(id));
+                .orElseThrow(() -> new PlayerNotFoundException(id));
     }
 
     @PostMapping("/add")
@@ -43,7 +50,7 @@ public class PlayerController {
     @PutMapping("/update/{id}")
     public Player update(@PathVariable("id") Integer id,
                          @RequestBody Player player) throws NotFoundException {
-        return playerService.update(id,player);
+        return playerService.update(id, player);
     }
 
     @DeleteMapping("/delete/{id}")
