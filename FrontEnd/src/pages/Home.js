@@ -16,7 +16,7 @@ const Home = () => {
 
   const loadPlayers = async () => {
     const result = await axios.get("http://localhost:8080/player/index");
-    setPlayer(result.data);
+    setPlayer(result.data.content);
   };
 
   const deletePlayer = async (id) => {
@@ -28,9 +28,11 @@ const Home = () => {
   // const pages = [...Array(totalPages+1).key().slice(1)];
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+
   const indexOfLastPlayer = currentPage * playersPerPage;
   const indexOfFirstPlayer = indexOfLastPlayer - playersPerPage;
 
+  // const visiblePlayers = Array.isArray(players) ? players.slice(indexOfFirstPlayer, indexOfLastPlayer) : [];
   const visiblePlayers = players.slice(indexOfFirstPlayer, indexOfLastPlayer);
 
   const prevPage = () => {
@@ -58,7 +60,7 @@ const Home = () => {
             <tbody>
               {visiblePlayers.map((player, index) => (
                 <tr>
-                  <th scope="row" key="index">
+                  <th scope="row" key="player.id">
                     {index + 1}
                   </th>
                   <td>{player.name}</td>
@@ -118,11 +120,11 @@ const Home = () => {
               </li>
             </ul>
           </nav>
-          <select onChange={(e) => setPlayersPerPage(e.target.value)}>
+          {/* <select onChange={(e) => setPlayersPerPage(e.target.value)}>
             <option value="4">4</option>
             <option value="2">2</option>
             <option value="3">3</option>
-          </select>
+          </select> */}
         </div>
       </div>
     </>
